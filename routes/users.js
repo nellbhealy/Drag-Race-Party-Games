@@ -5,7 +5,8 @@ const { pool } = require('../config');
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM users', (error, results) => {
     if (error) {
-      throw error;
+      console.log(error);
+      response.status(404).json({ status: 'error', message: 'Cannot get' });
     }
     response.status(200).json(results.rows);
   });
@@ -19,7 +20,7 @@ const addUser = (request, response) => {
     [name, email, private],
     (error) => {
       if (error) {
-        console.log(request.body);
+        console.log(error);
         response
           .status(404)
           .json({ status: 'error', message: 'User not added.' });
