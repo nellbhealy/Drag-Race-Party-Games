@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use('/users', users);
+app.use('/api/users', users);
 
 // Start server
 app.listen(process.env.PORT || 3002, () => {
