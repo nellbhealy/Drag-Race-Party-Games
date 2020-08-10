@@ -24,7 +24,7 @@ const addUser = (request, response) => {
         console.log(error);
         response
           .status(404)
-          .json({ status: 'error', message: JSON.stringify(pool) });
+          .json({ status: 'error', message: 'User not added' });
         return;
       }
       response.status(201).json({ status: 'success', message: 'User added.' });
@@ -32,7 +32,23 @@ const addUser = (request, response) => {
   );
 };
 
+const deleteUser = (request, response) => {
+  const id = request.params.id;
+
+  pool.query('DELETE FROM users WHERE ID=$1', [id], (error) => {
+    if (error) {
+      console.log(error);
+      response
+        .status(400)
+        .json({ status: 'error', message: 'User not deleted.' });
+      return;
+    }
+    response.status(201).json({ status: 'success', message: 'User deleted.' });
+  });
+};
+
 router.get('/', getUsers);
 router.post('/', addUser);
+router.delete('/:id', deleteUser);
 
 module.exports = router;
