@@ -24,7 +24,7 @@ const addUser = (request, response) => {
         console.log(error);
         response
           .status(404)
-          .json({ status: 'error', message: 'User not added.' });
+          .json({ status: 'error', message: JSON.stringify(error) });
         return;
       }
       response.status(201).json({ status: 'success', message: 'User added.' });
