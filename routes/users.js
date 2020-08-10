@@ -7,6 +7,7 @@ const getUsers = (request, response) => {
     if (error) {
       console.log(error);
       response.status(404).json({ status: 'error', message: 'Cannot get' });
+      return;
     }
     response.status(200).json(results.rows);
   });
