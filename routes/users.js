@@ -2,19 +2,34 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../config');
 
-const getUsers = (request, response) => {
-  pool.query('SELECT * FROM users', (error, results) => {
+const getUser = (req, res) => {
+  const id = req.params.id;
+  pool.query('SELECT * FROM users WHERE ID=$1', [id], (error, results) => {
     if (error) {
       console.log(error);
-      response.status(404).json({ status: 'error', message: 'Cannot get' });
+      res.status(404).json({
+        status: 'error',
+        message: `User with id ${id} does not exist`,
+      });
       return;
     }
-    response.status(200).json(results.rows);
+    res.status(200).json(results.rows);
   });
 };
 
-const addUser = (request, response) => {
-  const { name, email, private } = request.body;
+const getUsers = (req, res) => {
+  pool.query('SELECT * FROM users', (error, results) => {
+    if (error) {
+      console.log(error);
+      res.status(404).json({ status: 'error', message: 'Cannot get' });
+      return;
+    }
+    res.status(200).json(results.rows);
+  });
+};
+
+const addUser = (req, res) => {
+  const { name, email, private } = req.body;
 
   pool.query(
     'INSERT INTO users (name, email, private) VALUES ($1, $2, $3)',
@@ -22,16 +37,29 @@ const addUser = (request, response) => {
     (error) => {
       if (error) {
         console.log(error);
-        response
-          .status(404)
-          .json({ status: 'error', message: JSON.stringify(pool) });
+        res.status(404).json({ status: 'error', message: 'User not added' });
         return;
       }
-      response.status(201).json({ status: 'success', message: 'User added.' });
+      res.status(201).json({ status: 'success', message: 'User added.' });
     }
   );
 };
 
+const deleteUser = (req, res) => {
+  const id = req.params.id;
+
+  pool.query('DELETE FROM users WHERE ID=$1', [id], (error) => {
+    if (error) {
+      console.log(error);
+      res.status(400).json({ status: 'error', message: 'User not deleted.' });
+      return;
+    }
+    res.status(201).json({ status: 'success', message: 'User deleted.' });
+  });
+};
+
+router.get('/:id', getUser);
+router.delete('/:id', deleteUser);
 router.get('/', getUsers);
 router.post('/', addUser);
 
