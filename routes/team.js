@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../config');
 
-const createGroup = (req, res) => {
+const createTeam = (req, res) => {
   res
     .status(400)
     .json({ status: 'error', message: 'Route not yet implemented.' });
@@ -20,22 +20,27 @@ const removeMember = (req, res) => {
     .json({ status: 'error', message: 'Route not yet implemented.' });
 };
 
-const getGroup = (req, res) => {
+const getTeam = (req, res) => {
   res
     .status(400)
     .json({ status: 'error', message: 'Route not yet implemented.' });
 };
 
-const getAllGroups = (req, res) => {
+const getAllTeams = (req, res) => {
   res
     .status(400)
     .json({ status: 'error', message: 'Route not yet implemented.' });
 };
 
-router.get('/:id', getGroup);
+// GET
+router.get('/:id', getTeam);
+router.get('/', getAllTeams);
+
+// POST
 router.post('/:id', addMember);
+router.post('/', createTeam);
+
+// DELETE
 router.delete('/:id', removeMember);
-router.get('/', getAllGroups);
-router.post('/', createGroup);
 
 module.exports = router;
