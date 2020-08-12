@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const users = require('./routes/users');
-const groups = require('./routes/groups');
+const team = require('./routes/team');
 const queens = require('./routes/queens');
 const seasons = require('./routes/seasons');
 
@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/api/users', users);
-app.use('/api/groups', groups);
+app.use('/api/groups', team);
 app.use('/api/queens', queens);
 app.use('/api/seasons', seasons);
 
