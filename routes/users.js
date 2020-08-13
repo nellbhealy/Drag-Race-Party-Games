@@ -58,9 +58,14 @@ const deleteUser = (req, res) => {
   });
 };
 
+// GET
 router.get('/:id', getUser);
-router.delete('/:id', deleteUser);
 router.get('/', getUsers);
+
+// POST
 router.post('/', addUser);
+
+// DELETE
+router.delete('/:id', deleteUser);
 
 module.exports = router;
