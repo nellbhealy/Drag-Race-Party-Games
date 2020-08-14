@@ -4,6 +4,12 @@ const { pool } = require('../config');
 
 const ERROR = 'Something went wrong, sorry bout it!';
 
+const queenExists = (name) => {
+  pool.query('SELECT * FROM queens WHERE name=$1', [name], (error, results) => {
+    return !error && results.rows.length;
+  });
+};
+
 const getQueen = (req, res) => {
   const id = req.params.id;
   pool.query('SELECT * FROM queens WHERE id=$1', [id], (error, results) => {
@@ -37,6 +43,15 @@ const getAllQueens = (req, res) => {
 
 const createQueen = (req, res) => {
   const { name } = req.body;
+
+  if (queenExists) {
+    res.status(400).json({
+      status: 'error',
+      message: `Queen with name ${name} already exists`,
+    });
+    return;
+  }
+
   pool.query('INSERT INTO queens(name) VALUES ($1)', [name], (error) => {
     if (error) {
       console.log(error);
@@ -46,6 +61,7 @@ const createQueen = (req, res) => {
       });
       return;
     }
+
     res.status(201).json({ status: 'success', message: 'Queen created.' });
   });
 };
@@ -53,6 +69,15 @@ const createQueen = (req, res) => {
 const updateQueen = (req, res) => {
   const { name } = req.body;
   const id = req.params.id;
+
+  if (queenExists) {
+    res.status(400).json({
+      status: 'error',
+      message: `Queen with name ${name} already exists`,
+    });
+    return;
+  }
+
   pool.query(
     'UPDATE queens SET name=$1 WHERE id=$2 RETURNING *',
     [name, id],
