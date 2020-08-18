@@ -37,19 +37,19 @@ TODO: `PUT /users/:userId/drafts/:seasonId/:queenId` Requires JSON body `{ place
 
 `GET /teams` Returns all team names and IDs
 
-TODO: `GET /teams/:id` Returns all team member IDs for given team
+`GET /teams/:teamId` Returns all team member IDs for given team
 
-TODO: `GET /teams/:id/drafts` Returns drafts of all given team’s members
+TODO: `GET /teams/:teamId/drafts` Returns drafts of all given team’s members
 
-TODO: `POST /teams` Requires JSON body of `{ name: string }`
+`POST /teams` Requires JSON body of `{ name: string }`
 
-TODO: `POST /teams/:teamId/:userId` Adds user to team
+`POST /teams/:teamId/:userId` Adds user to team
 
-TODO: `PUT /teams/:id` Requires JSON body of `{ name: string }`
+`PUT /teams/:teamId` Requires JSON body of `{ name: string }`
 
 `DELETE /teams/:teamId` Deletes given team
 
-TODO: `DELETE /teams/:teamId/:userId` Deletes given user from team
+`DELETE /teams/:teamId/:userId` Deletes given user from team
 
 ## Seasons
 
