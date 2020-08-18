@@ -28,6 +28,7 @@ const getAllTeams = (req, res) => {
   pool.query('SELECT * FROM teams', (error, results) => {
     if (error) {
       sendError(res);
+      return;
     }
     res.status(200).json(results.rows);
   });
