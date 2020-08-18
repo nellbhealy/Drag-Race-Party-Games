@@ -77,6 +77,26 @@ const createTeam = (req, res) => {
   });
 };
 
+const updateTeam = (req, res) => {
+  const { name } = req.body;
+  const { teamId } = req.params;
+
+  pool.query(
+    'UPDATE teams SET name=$1 WHERE id=$2 RETURNING *',
+    [name, teamId],
+    (error, results) => {
+      if (error) {
+        res.status(400).json({
+          status: 'error',
+          message: 'Requires JSON body { name: string }',
+        });
+        return;
+      }
+      res.status(200).json(results.rows);
+    }
+  );
+};
+
 const removeMember = (req, res) => {
   const { teamId, userId } = req.params;
 
@@ -131,6 +151,9 @@ router.get('/', getAllTeams);
 // POST
 router.post('/:teamId/:userId', addMember);
 router.post('/', createTeam);
+
+// PUT
+router.put('/:teamId', updateTeam);
 
 // DELETE
 router.delete('/:teamId/:userId', removeMember);
