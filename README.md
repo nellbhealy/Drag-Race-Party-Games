@@ -1,14 +1,25 @@
 # Paths
 
-All paths begin with `/api/`
+All paths begin with `https://rpdr-party-games.herokuapp.com/api/`
 
 ## Users
 
 `GET /users` Returns all users
 
-`POST /users` Requires json body of `{ name: string, email: string, private: boolean }`
-
 `GET /users/:id` Returns user with specified id
+
+TODO: `GET /users/:userId/drafts` Returns specified user’s drafts
+
+TODO: `GET /users/:userId/drafts/:seasonId` Returns specified draft
+
+TODO: `GET /users/:userId/drafts/:seasonId/points` Returns points for given draft
+
+`POST /users` Requires JSON body of `{ name: string, email: string, private: boolean }`
+
+TODO: `POST /users/:userId/drafts/:seasonId` Requires JSON body `{ [queenId]: [placement: number, congeniality: boolean] }`
+_{ 1: [1, false], 2: [2, false], 3: [2, false], 4: [4, false] … }_
+
+TODO: `PUT /users/:userId/drafts/:seasonId/:queenId` Requires JSON body `{ placement: number, congeniality: boolean }
 
 `DELETE /users/:id` Deletes user with specified id
 
