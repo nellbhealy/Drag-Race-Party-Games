@@ -34,9 +34,23 @@ const getAllTeams = (req, res) => {
 };
 
 const addMember = (req, res) => {
-  res
-    .status(400)
-    .json({ status: 'error', message: 'Route not yet implemented.' });
+  const { teamId, userId } = req.params;
+
+  pool.query(
+    'INSERT INTO team_members(user_id, team_id) VALUES($1, $2)',
+    [userId, teamId],
+    (error) => {
+      if (error) {
+        sendError(res);
+        return;
+      }
+      sendSuccess(
+        res,
+        201,
+        `Member created with id ${userId} into team with id ${teamId}`
+      );
+    }
+  );
 };
 
 const createTeam = (req, res) => {
@@ -115,7 +129,7 @@ router.get('/:teamId', getTeam);
 router.get('/', getAllTeams);
 
 // POST
-router.post('/:id', addMember);
+router.post('/:teamId/:userId', addMember);
 router.post('/', createTeam);
 
 // DELETE
