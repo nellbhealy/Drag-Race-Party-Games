@@ -8,18 +8,9 @@ All paths begin with `https://rpdr-party-games.herokuapp.com/api/`
 
 `GET /users/:id` Returns user with specified id
 
-TODO: `GET /users/:userId/drafts` Returns specified user’s drafts
-
-TODO: `GET /users/:userId/drafts/:seasonId` Returns specified draft
-
 TODO: `GET /users/:userId/drafts/:seasonId/points` Returns points for given draft
 
 `POST /users` Requires JSON body of `{ name: string, email: string, private: boolean }`
-
-TODO: `POST /users/:userId/drafts/:seasonId` Requires JSON body `{ [queenId]: [placement: number, congeniality: boolean] }`
-_{ 1: [1, false], 2: [2, false], 3: [2, false], 4: [4, false] … }_
-
-TODO: `PUT /users/:userId/drafts/:seasonId/:queenId` Requires JSON body `{ placement: number, congeniality: boolean }
 
 `DELETE /users/:id` Deletes user with specified id
 
@@ -39,8 +30,6 @@ TODO: `PUT /users/:userId/drafts/:seasonId/:queenId` Requires JSON body `{ place
 
 `GET /teams/:teamId` Returns all team member IDs for given team
 
-TODO: `GET /teams/:teamId/drafts` Returns drafts of all given team’s members
-
 `POST /teams` Requires JSON body of `{ name: string }`
 
 `POST /teams/:teamId/:userId` Adds user to team
@@ -59,10 +48,24 @@ TODO: `GET /seasons/:id` Returns all contestants on season with body `{ number: 
 
 TODO: `GET /seasons/:seasonId/:queenId` Returns given contestant
 
-TODO: `GET /seasons/:seasonId/drafts` Returns all drafts for given season
-
 TODO: `POST /seasons` Requires JSON body of `{ number: number, show: string }`
 
 TODO: `POST /seasons/:seasonId/:queenId` Optional JSON body of `{ placement: number, congeniality: boolean }`
 
 TODO: `PUT /seasons/:seasonId/:queenId` Takes JSON body of `{ placement: number, congeniality: boolean }`
+
+## Drafts
+
+`GET /drafts` Returns all drafts
+
+`GET /drafts/:seasonId` Returns all drafts for a given season
+
+`GET /drafts/:seasonId/:userId` Returns a given user's draft for a given season
+
+`GET /drafts/:userId` Returns all drafts for a given user
+
+TODO: `GET /drafts/:teamId` Returns drafts of all given team’s members
+
+`POST /drafts/:userId/:seasonId` Requires JSON body of `{ entries: [ { contestantId: number, placement: number, congeniality: boolean }, ... ] }`, e.g. { entries: [ { contestantId: 1, placement: 1, congeniality: false }, ... ] }
+
+`PUT /drafts/:userId/:seasonId` Requires JSON body of `{ contestantId: number, placement: number, congeniality: boolean }`
