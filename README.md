@@ -42,17 +42,17 @@ TODO: `GET /users/:userId/drafts/:seasonId/points` Returns points for given draf
 
 ## Seasons
 
-TODO: `GET /seasons` Returns all seasons
+`GET /seasons` Returns all seasons
 
-TODO: `GET /seasons/:id` Returns all contestants on season with body `{ number: number, show: string, contestants: array }`
+`GET /seasons/:id` Returns all contestants on season with body `{ number: number, show: string, contestants: array }`
 
-TODO: `GET /seasons/:seasonId/:queenId` Returns given contestant
+`GET /seasons/:seasonId/:queenId` Returns given contestant
 
-TODO: `POST /seasons` Requires JSON body of `{ number: number, show: string }`
+`POST /seasons` Requires JSON body of `{ number: number, show: string }`
 
-TODO: `POST /seasons/:seasonId/:queenId` Optional JSON body of `{ placement: number, congeniality: boolean }`
+`POST /seasons/:seasonId/:queenId` Optional JSON body of `{ placement: number, congeniality: boolean }`
 
-TODO: `PUT /seasons/:seasonId/:queenId` Takes JSON body of `{ placement: number, congeniality: boolean }`
+`PUT /seasons/:seasonId/:queenId` Takes JSON body of `{ placement: number, congeniality: boolean }`
 
 ## Drafts
 
