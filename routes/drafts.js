@@ -117,7 +117,7 @@ const updateEntry = (req, res) => {
 // GET
 router.get('/:seasonId/:userId', getDraft);
 router.get('/:userId', getUserDrafts);
-router.get('/:seasonId', getSeasonDrafts);
+router.get('/season/:seasonId', getSeasonDrafts);
 router.get('/', getAllDrafts);
 
 // POST

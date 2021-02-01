@@ -1,3 +1,8 @@
+# Info
+
+## Naming Conventions
+Series are denoted by country (e.g., US, UK).  Additionally, All Stars seasons will be marked with "AS" (e.g., US_AS).
+
 # Paths
 
 All paths begin with `https://rpdr-party-games.herokuapp.com/api/`
