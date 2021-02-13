@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../config');
 
-const getDraft = (req, res) => {
+const getPredictions = (req, res) => {
   const seasonId = parseInt(req.params.seasonId);
   const userId = parseInt(req.params.userId);
 
@@ -19,7 +19,7 @@ const getDraft = (req, res) => {
   }
 };
 
-const getUserDrafts = (req, res) => {
+const getUserPredictions = (req, res) => {
   const userId = parseInt(req.params.userId);
 
   if (!isNaN(userId)) {
@@ -35,7 +35,7 @@ const getUserDrafts = (req, res) => {
   }
 };
 
-const getSeasonDrafts = (req, res) => {
+const getSeasonPredictions = (req, res) => {
   const seasonId = parseInt(req.params.seasonId);
 
   if (!isNaN(seasonId)) {
@@ -51,7 +51,7 @@ const getSeasonDrafts = (req, res) => {
   }
 };
 
-const getAllDrafts = (req, res) => {
+const getAllPredictions = (req, res) => {
   pool.query('SELECT * FROM drafts', (err) => {
     if (err) {
       throw err;
@@ -61,12 +61,12 @@ const getAllDrafts = (req, res) => {
   });
 };
 
-const createEntry = (req, res) => {
+const createPrediction = (req, res) => {
   const seasonId = parseInt(req.params.seasonId);
   const userId = parseInt(req.params.userId);
 
   if (!(isNaN(seasonId) || isNaN(userId))) {
-    for (const entry of res.body.entries) {
+    for (const entry of req.body.entries) {
       const { contestantId, placement, congeniality } = entry;
   
       if (contestantId != null && placement != null && congeniality != null) {
@@ -94,7 +94,7 @@ const createEntry = (req, res) => {
   }
 };
 
-const updateEntry = (req, res) => {
+const updatePrediction = (req, res) => {
   const seasonId = parseInt(req.params.seasonId);
   const userId = parseInt(req.params.userId);
 
@@ -115,15 +115,15 @@ const updateEntry = (req, res) => {
 };
 
 // GET
-router.get('/:seasonId/:userId', getDraft);
-router.get('/:userId', getUserDrafts);
-router.get('/:seasonId', getSeasonDrafts);
-router.get('/', getAllDrafts);
+router.get('/:userId/:seasonId', getPredictions);
+router.get('/user/:userId', getUserPredictions);
+router.get('/season/:seasonId', getSeasonPredictions);
+router.get('/', getAllPredictions);
 
 // POST
-router.post('/:userId/:seasonId', createEntry);
+router.post('/:userId/:seasonId', createPrediction);
 
 // PUT
-router.put('/:userId/:seasonId', updateEntry);
+router.put('/:userId/:seasonId', updatePrediction);
 
 module.exports = router;

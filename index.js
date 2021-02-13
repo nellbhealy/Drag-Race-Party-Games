@@ -5,7 +5,7 @@ const users = require('./routes/users');
 const team = require('./routes/teams');
 const queens = require('./routes/queens');
 const seasons = require('./routes/seasons');
-const drafts = require('./routes/drafts');
+const predictions = require('./routes/predictions');
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use('/api/users', users);
 app.use('/api/teams', team);
 app.use('/api/queens', queens);
 app.use('/api/seasons', seasons);
-app.use('/api/drafts', drafts);
+app.use('/api/predictions', predictions);
 
 // Start server
 app.listen(process.env.PORT || 3002, () => {
