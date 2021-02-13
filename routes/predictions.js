@@ -118,9 +118,9 @@ const updatePrediction = (req, res) => {
 };
 
 // GET
-router.get('/:userId/:seasonId', getPredictions);
 router.get('/user/:userId', getUserPredictions);
 router.get('/season/:seasonId', getSeasonPredictions);
+router.get('/:userId/:seasonId', getPredictions);
 router.get('/', getAllPredictions);
 
 // POST

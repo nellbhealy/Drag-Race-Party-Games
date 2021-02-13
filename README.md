@@ -59,18 +59,18 @@ TODO: `GET /users/:userId/drafts/:seasonId/points` Returns points for given draf
 
 `PUT /seasons/:seasonId/:queenId` Takes JSON body of `{ placement: number, congeniality: boolean }`
 
-## Drafts
+## Predictions
 
-`GET /drafts` Returns all drafts
+`GET /predictions` Returns all predictions
 
-`GET /drafts/:seasonId` Returns all drafts for a given season
+`GET /predictions/season/:seasonId` Returns all predictions for a given season
 
-`GET /drafts/:seasonId/:userId` Returns a given user's draft for a given season
+`GET /predictions/user/:userId` Returns all predictions for a given user
 
-`GET /drafts/:userId` Returns all drafts for a given user
+`GET /predictions/:seasonId/:userId` Returns a given user's draft for a given season
 
-TODO: `GET /drafts/:teamId` Returns drafts of all given team’s members
+TODO: `GET /predictions/:teamId` Returns predictions of all given team’s members
 
-`POST /drafts/:userId/:seasonId` Requires JSON body of `{ entries: [ { contestantId: number, placement: number, congeniality: boolean }, ... ] }`, e.g. { entries: [ { contestantId: 1, placement: 1, congeniality: false }, ... ] }
+`POST /predictions/:userId/:seasonId` Requires JSON body of `{ entries: [ { contestantId: number, placement: number, congeniality: boolean }, ... ] }`, e.g. { entries: [ { contestantId: 1, placement: 1, congeniality: false }, ... ] }
 
-`PUT /drafts/:userId/:seasonId` Requires JSON body of `{ contestantId: number, placement: number, congeniality: boolean }`
+`PUT /predictions/:userId/:seasonId` Requires JSON body of `{ contestantId: number, placement: number, congeniality: boolean }`
