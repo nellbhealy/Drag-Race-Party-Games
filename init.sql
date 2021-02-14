@@ -41,13 +41,13 @@ CREATE TABLE contestants (
 CREATE TABLE drafts (
     user_id INT NOT NULL,
     season_id INT NOT NULL,
-    contestant_id INT NOT NULL,
+    queen_id INT NOT NULL,
     placement INT NOT NULL,
     congeniality BOOLEAN,
     FOREIGN KEY(user_id) REFERENCES users(ID),
     FOREIGN KEY(season_id) REFERENCES seasons(ID),
-    FOREIGN KEY(contestant_id) REFERENCES queens(ID),
-    UNIQUE(user_id, season_id, contestant_id)
+    FOREIGN KEY(queen_id) REFERENCES queens(ID),
+    UNIQUE(user_id, season_id, queen_id)
 );
 
 INSERT INTO users (name, email, private)

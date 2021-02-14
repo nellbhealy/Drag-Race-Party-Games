@@ -67,13 +67,13 @@ const createPrediction = (req, res) => {
 
   if (!(isNaN(seasonId) || isNaN(userId))) {
     for (const entry of req.body.entries) {
-      const { contestantId, placement, congeniality } = entry;
+      const { queenId, placement, congeniality } = entry;
   
-      if (contestantId != null && placement != null && congeniality != null) {
-          if (!(isNaN(contestantId) || isNaN(placement)) && typeof congeniality === "boolean") {
+      if (queenId != null && placement != null && congeniality != null) {
+          if (!(isNaN(queenId) || isNaN(placement)) && typeof congeniality === "boolean") {
               pool.query(
-                'INSERT INTO drafts (season_id, user_id, contestant_id, placement, congeniality) VALUES ($1, $2, $3, $4, $5)',
-                [seasonId, userId, contestantId, placement, congeniality],
+                'INSERT INTO drafts (season_id, user_id, queen_id, placement, congeniality) VALUES ($1, $2, $3, $4, $5)',
+                [seasonId, userId, queenId, placement, congeniality],
                 (err) => {
                   if (err) {
                       throw err;
@@ -84,11 +84,11 @@ const createPrediction = (req, res) => {
               });
           }
           else {
-              res.status(400).send('Failure. Either contestantId and/or placement is not a number, or congeniality is not a boolean');
+              res.status(400).send('Failure. Either queenId and/or placement is not a number, or congeniality is not a boolean');
           }
       }
       else {
-          res.status(400).send("Error: Either contestantId, placement, or congeniality fields do not exist or are named incorrectly or are null");
+          res.status(400).send("Error: Either queenId, placement, or congeniality fields do not exist or are named incorrectly or are null");
       }
       
     }
@@ -101,9 +101,9 @@ const updatePrediction = (req, res) => {
   const seasonId = parseInt(req.params.seasonId);
   const userId = parseInt(req.params.userId);
 
-  const { contestantId, placement, congeniality } = req.body;
-  if (seasonId && userId && placement && contestantId && typeof congeniality === "boolean") {
-      pool.query('UPDATE drafts SET placement = $4, congeniality = $5 WHERE season_id = $1 AND user_id = $2 AND contestant_id = $3', [seasonId, userId, contestantId, placement, congeniality], (err) => {
+  const { queenId, placement, congeniality } = req.body;
+  if (seasonId && userId && placement && queenId && typeof congeniality === "boolean") {
+      pool.query('UPDATE drafts SET placement = $4, congeniality = $5 WHERE season_id = $1 AND user_id = $2 AND queen_id = $3', [seasonId, userId, queenId, placement, congeniality], (err) => {
           if (err) {
               throw err;
           }
@@ -113,7 +113,7 @@ const updatePrediction = (req, res) => {
       });
   }
   else {
-      res.status(400).send('Failure. Either one of (contestantId, placement, seasonId, userId) is not a number, or completed is not a boolean');
+      res.status(400).send('Failure. Either one of (queenId, placement, seasonId, userId) is not a number, or completed is not a boolean');
   }
 };
 
