@@ -2,7 +2,8 @@ CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  private BOOLEAN NOT NULL
+  private BOOLEAN NOT NULL,
+  UNIQUE(email)
 );
 
 CREATE TABLE teams (
@@ -24,7 +25,7 @@ CREATE TABLE queens (
 CREATE TABLE team_members (
     user_id INT,
     team_id INT,
-    FOREIGN KEY(user_id) REFERENCES users(ID),
+    FOREIGN KEY(user_id) REFERENCES users(ID) ON DELETE CASCADE,
     FOREIGN KEY(team_id) REFERENCES teams(ID)
 );
 
@@ -44,7 +45,7 @@ CREATE TABLE drafts (
     queen_id INT NOT NULL,
     placement INT NOT NULL,
     congeniality BOOLEAN,
-    FOREIGN KEY(user_id) REFERENCES users(ID),
+    FOREIGN KEY(user_id) REFERENCES users(ID) ON DELETE CASCADE,
     FOREIGN KEY(season_id) REFERENCES seasons(ID),
     FOREIGN KEY(queen_id) REFERENCES queens(ID),
     UNIQUE(user_id, season_id, queen_id)
