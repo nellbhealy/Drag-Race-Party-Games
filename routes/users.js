@@ -82,7 +82,7 @@ const deleteUser = (req, res) => {
 };
 
 // GET
-router.get('/:id', getUser);
+// router.get('/:id', getUser);
 router.get('/:email', getUserByEmail);
 router.get('/', getUsers);
 
